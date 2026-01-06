@@ -15,14 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Create event
         $title = $_POST['title'];
         $description = $_POST['description'];
-        $venue = $_POST['venue'];
+        $event_location = $_POST['event_location'] ?? $_POST['venue'];
         $start_date = $_POST['start_date'];
         $end_date = $_POST['end_date'];
-        $manager_id = $_SESSION['user_id']; // Get manager_id from session
+        $admin_id = $_SESSION['user_id']; // Get admin_id from session
 
         // Insert event into database
-        $query = "insert INTO events (title, description, venue, start_date, end_date, manager_id) 
-                  VALUES ('$title', '$description', '$venue', '$start_date', '$end_date', '$manager_id')";
+        $query = "INSERT INTO events (title, description, event_location, start_date, end_date, admin_id) 
+                  VALUES ('$title', '$description', '$event_location', '$start_date', '$end_date', '$admin_id')";
         if (mysqli_query($conn, $query)) {
             echo "success=Event created successfully!";
         } else {
